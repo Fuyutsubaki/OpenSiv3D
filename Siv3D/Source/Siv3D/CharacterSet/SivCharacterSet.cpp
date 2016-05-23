@@ -268,9 +268,9 @@ namespace s3d
 			}
 		}
 
-		inline bool is_high_surrogate(const char16_t c) { return (c >= 0xD800) && (c < 0xDC00); }
+		inline constexpr bool is_high_surrogate(const char16_t c) { return (c >= 0xD800) && (c < 0xDC00); }
 
-		inline bool is_low_surrogate(const char16_t c) { return (c >= 0xDC00) && (c < 0xE000); }
+		inline constexpr bool is_low_surrogate(const char16_t c) { return (c >= 0xDC00) && (c < 0xE000); }
 
 		template <class Char16>
 		static offset_pt utf16_decode_check(const Char16* const s, const size_t length)

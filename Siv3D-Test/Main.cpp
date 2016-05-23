@@ -50,15 +50,13 @@ void Main()
 
 	//for (int32 i = 0; i < 50; ++i)
 	//{
-	//	tp.begin(L"FromUTF8");
-	//	CharacterSet::FromUTF8(u8"あいうえおabc漢字あいうえおabc漢字あいうえおabc漢字あいうえおabc漢字あいうえおabc漢字あいうえおabc漢字あいうえおabc漢字");
+	//	tp.begin(L"");
 	//	tp.end();
 	//}
 
 	//for (int32 i = 0; i < 50; ++i)
 	//{
-	//	tp.begin(L"UTF8ToUTF16");
-	//	CharacterSet::UTF8ToUTF16(u8"あいうえおabc漢字あいうえおabc漢字あいうえおabc漢字あいうえおabc漢字あいうえおabc漢字あいうえおabc漢字あいうえおabc漢字");
+	//	tp.begin(L"");
 	//	tp.end();
 	//}
 
