@@ -5,42 +5,42 @@ using namespace s3d;
 using namespace s3d::literals;
 using namespace std::chrono_literals;
 
-static constexpr wchar hexTable[16] =
-{ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
-
-void Dump(const void* data, size_t size)
-{
-	if (data == nullptr || size == 0)
-	{
-		return;
-	}
-
-	const uint8* ptr = static_cast<const uint8*>(data);
-
-	String result(size * 3 - 1, L'0');
-
-	wchar* dst = &result[0];
-
-	bool isFirst = true;
-
-	while (size--)
-	{
-		if (isFirst == true)
-		{
-			isFirst = false;
-		}
-		else
-		{
-			*dst++ = L' ';
-		}
-
-		*dst++ = hexTable[(*ptr) >> 4];
-		*dst++ = hexTable[(*ptr) & 0x0F];
-		++ptr;
-	}
-
-	Log(result);
-}
+//static constexpr wchar hexTable[16] =
+//{ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+//
+//void Dump(const void* data, size_t size)
+//{
+//	if (data == nullptr || size == 0)
+//	{
+//		return;
+//	}
+//
+//	const uint8* ptr = static_cast<const uint8*>(data);
+//
+//	String result(size * 3 - 1, L'0');
+//
+//	wchar* dst = &result[0];
+//
+//	bool isFirst = true;
+//
+//	while (size--)
+//	{
+//		if (isFirst == true)
+//		{
+//			isFirst = false;
+//		}
+//		else
+//		{
+//			*dst++ = L' ';
+//		}
+//
+//		*dst++ = hexTable[(*ptr) >> 4];
+//		*dst++ = hexTable[(*ptr) & 0x0F];
+//		++ptr;
+//	}
+//
+//	Log(result);
+//}
 
 void Main()
 {

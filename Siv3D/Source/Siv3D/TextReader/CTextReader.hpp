@@ -23,13 +23,9 @@ namespace s3d
 
 		FilePath m_fullPath;
 
-		int64 m_size = 0;
-
 		int32 m_bomSize = 0;
 
 		TextEncoding m_textEncoding = TextEncoding::Default;
-
-		bool m_opened = false;
 
 	public:
 
@@ -37,9 +33,7 @@ namespace s3d
 
 		~CTextReader();
 
-		bool open(const FilePath& path, const Optional<TextEncoding>& encoding);
-
-		bool open(const std::shared_ptr<IReader>& reader, const Optional<TextEncoding>& encoding);
+		bool open(const std::shared_ptr<IReader>& reader, const FilePath& path_optional, const Optional<TextEncoding>& encoding);
 
 		void close();
 
