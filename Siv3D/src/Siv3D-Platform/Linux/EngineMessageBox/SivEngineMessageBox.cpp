@@ -18,12 +18,12 @@ namespace s3d
 	{
 		void Show(const StringView text)
 		{
-			System::ShowMessageBox(U"Application Error", String(text), MessageBoxStyle::Info, MessageBoxButtons::OK);
+			//System::ShowMessageBox(U"Application Error", String(text), MessageBoxStyle::Info, MessageBoxButtons::OK);
 		}
 
 		void ShowError(const StringView text)
 		{
-			System::ShowMessageBox(U"Application Error", String(text), MessageBoxStyle::Error, MessageBoxButtons::OK);
+			//System::ShowMessageBox(U"Application Error", String(text), MessageBoxStyle::Error, MessageBoxButtons::OK);
 		}
 	}
 }

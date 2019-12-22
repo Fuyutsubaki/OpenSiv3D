@@ -38,14 +38,14 @@ namespace s3d
 
 		CLogger();
 
-		~CLogger() override;
+		~CLogger() override{}// 面倒なので全部off
 
-		void setOutputLevel(OutputLevel level) override;
+		void setOutputLevel(OutputLevel level) override{}
 
-		void write(LogDescription desc, const String& text) override;
+		void write(LogDescription desc, const String& text) override{}
 
-		void writeOnce(LogDescription desc, uint32 id, const String& text) override;
+		void writeOnce(LogDescription desc, uint32 id, const String& text) override{}
 
-		void writeRawHTML_UTF8(std::string_view htmlText) override;
+		void writeRawHTML_UTF8(std::string_view htmlText) override{}
 	};
 }

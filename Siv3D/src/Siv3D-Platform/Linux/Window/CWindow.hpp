@@ -15,9 +15,7 @@
 # include <Siv3D/Scene.hpp>
 # include <Siv3D/Rectangle.hpp>
 # include <Window/IWindow.hpp>
-
-# include <GL/glew.h>
-# include <GLFW/glfw3.h>
+# include <SDL2/SDL.h>
 
 namespace s3d
 {
@@ -25,7 +23,7 @@ namespace s3d
 	{
 	private:
 		
-		GLFWwindow* m_window = nullptr;
+		SDL_Window* m_window = nullptr;
 
 		String m_title		= U"Siv3D App";
 		String m_titleText	= Platform::DebugBuild ? U"Siv3D App (Debug Build)" : U"Siv3D App";
@@ -41,12 +39,6 @@ namespace s3d
 		void doResizeBackBuffer();
 
 		void doToggleFullscreen();
-		
-		static void OnMove(GLFWwindow* window, int x, int y);
-		
-		static void OnResize(GLFWwindow* window, int width, int height);
-		
-		static void OnIconify(GLFWwindow* window, int iconified);
 
 	public:
 

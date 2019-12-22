@@ -19,12 +19,14 @@
 # include <System/ISystem.hpp>
 # include <Profiler/IProfiler.hpp>
 # include <Graphics/IGraphics.hpp>
+# include <SDL2/SDL.h>
 # include "CWindow.hpp"
 
 namespace s3d
 {
 	namespace detail
 	{
+		/*
 		void SetFullscreen(GLFWwindow* window, const Size& size)
 		{
 			int32 numMonitors;
@@ -32,7 +34,7 @@ namespace s3d
 			const size_t currentIndex = System::GetCurrentMonitorIndex();
 			::glfwSetWindowMonitor(window, monitors[currentIndex], 0, 0, size.x, size.y, GLFW_DONT_CARE);
 		}
-		
+
 		bool CheckFullscreenSize(const Size& size)
 		{
 			const Array<DisplayOutput> outputs = Graphics::EnumOutputs();
@@ -53,6 +55,7 @@ namespace s3d
 			
 			return false;
 		}
+				*/
 	}
 	
 	CWindow::CWindow()
@@ -62,13 +65,19 @@ namespace s3d
 
 	CWindow::~CWindow()
 	{
-		LOG_TRACE(U"CWindow::~CWindow()");
+		SDL_DestroyWindow(m_window);
+		//LOG_TRACE(U"CWindow::~CWindow()");
 		
-		::glfwTerminate();
+		//::glfwTerminate();
 	}
 
 	void CWindow::init()
 	{
+		SDL_Init(SDL_INIT_VIDEO); // もっといい場所があるかもしれない
+		m_window= SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 320, 0);
+		std::cout<<(void*)m_window<<std::endl;
+
+		/*
 		LOG_TRACE(U"CWindow::init()");
 		
 		::glfwInitHint(GLFW_COCOA_CHDIR_RESOURCES, GLFW_FALSE);
@@ -121,6 +130,7 @@ namespace s3d
 		::glfwSwapInterval(1);
 		
 		LOG_INFO(U"ℹ️ CWindow initialized");
+		*/
 	}
 
 	void CWindow::show(const bool)
@@ -131,6 +141,7 @@ namespace s3d
 
 	void CWindow::update()
 	{
+		/*
 		if constexpr (Platform::DebugBuild)
 		{
 			const String statistics = Siv3DEngine::Get<ISiv3DProfiler>()->getSimpleStatistics();
@@ -178,10 +189,12 @@ namespace s3d
 		{
 			Siv3DEngine::Get<ISiv3DGraphics>()->setSceneSize(m_state.bounds.size);
 		}
+		 */
 	}
 
 	void CWindow::setWindowTitle(const String& title)
 	{
+		/*
 		if (m_title != title)
 		{
 			if constexpr (Platform::DebugBuild)
@@ -198,6 +211,7 @@ namespace s3d
 
 			::glfwSetWindowTitle(m_window, m_titleText.narrow().c_str());
 		}
+		 */
 	}
 
 	const String& CWindow::getWindowTitle() const
@@ -227,6 +241,7 @@ namespace s3d
 
 	void CWindow::setStyle(const WindowStyle style)
 	{
+		/*
 		if (m_state.fullscreen)
 		{
 			m_state.style = style;
@@ -256,6 +271,7 @@ namespace s3d
 		}
 		
 		m_state.style = style;
+		*/
 	}
 
 	Size CWindow::getClientSize() const
@@ -275,11 +291,12 @@ namespace s3d
 			return;
 		}
 
-		::glfwSetWindowPos(m_window, pos.x, pos.y);
+		//::glfwSetWindowPos(m_window, pos.x, pos.y);
 	}
 
 	bool CWindow::resizeClient(const Size& size, const WindowResizeOption option, const bool centering)
 	{
+		/*
 		if ((option == WindowResizeOption::ResizeSceneSize)
 			|| ((option == WindowResizeOption::UseDefaultScaleMode) && (m_scaleMode == ScaleMode::ResizeFill)))
 		{
@@ -318,25 +335,28 @@ namespace s3d
 		}
 
 		return true;
+		 */
+		return false;
 	}
 
 	void CWindow::maximize()
 	{
-		::glfwMaximizeWindow(m_window);
+		//::glfwMaximizeWindow(m_window);
 	}
 	
 	void CWindow::restore()
 	{
-		::glfwRestoreWindow(m_window);
+		//::glfwRestoreWindow(m_window);
 	}
 
 	void CWindow::minimize()
 	{
-		::glfwIconifyWindow(m_window);
+		//::glfwIconifyWindow(m_window);
 	}
 
 	bool CWindow::setFullscreen(const bool fullscreen, const Optional<Size>& fullscreenResolution, WindowResizeOption option)
 	{
+		/*
 		LOG_TRACE(U"CWindow::setFullscreen({})"_fmt(fullscreen));
 
 		const auto ResizeScene = [option, scaleMode = m_scaleMode](const Size& size)
@@ -409,6 +429,8 @@ namespace s3d
 			ResizeScene(targetSize);
 			return true;
 		}
+		 */
+		return false;
 	}
 
 	void* CWindow::getHandle() const
@@ -424,6 +446,7 @@ namespace s3d
 
 	void CWindow::requestBackBufferResizing(const Size& size, const bool minimized, const bool maximized)
 	{
+		/*
 		LOG_TRACE(U"CWindow::requestBackBufferResizing()");
 
 		if ((size != Siv3DEngine::Get<ISiv3DGraphics>()->getBackBufferSize()) && !minimized)
@@ -439,6 +462,7 @@ namespace s3d
 
 		m_state.minimized	= minimized;
 		m_state.maximized	= maximized;
+		 */
 	}
 
 	void CWindow::requestToggleFullscreen()
@@ -475,31 +499,5 @@ namespace s3d
 		setFullscreen(!m_state.fullscreen, unspecified, WindowResizeOption::KeepSceneSize);
 		
 		m_toggleFullscreenRequest	= false;
-	}
-	
-	void CWindow::OnMove(GLFWwindow* window, int x, int y)
-	{
-		CWindow* pWindow = static_cast<CWindow*>(::glfwGetWindowUserPointer(window));
-		pWindow->m_state.bounds.setPos(x, y);
-		
-		LOG_TRACE(U"Window pos: {}"_fmt(pWindow->m_state.bounds.pos));
-	}
-	
-	void CWindow::OnResize(GLFWwindow* window, int width, int height)
-	{
-		CWindow* pWindow = static_cast<CWindow*>(::glfwGetWindowUserPointer(window));
-		pWindow->m_state.bounds.setSize(width, height);
-		pWindow->m_state.clientSize.set(width, height);
-		
-		LOG_TRACE(U"Window size: {}"_fmt(pWindow->m_state.bounds.size));
-	}
-	
-	void CWindow::OnIconify(GLFWwindow* window, int iconified)
-	{
-		CWindow* pWindow = static_cast<CWindow*>(::glfwGetWindowUserPointer(window));
-		pWindow->m_state.minimized = (iconified == GLFW_TRUE);
-		pWindow->m_state.maximized = false;
-		
-		LOG_TRACE(U"Window minimized: {}"_fmt(pWindow->m_state.minimized));
 	}
 }

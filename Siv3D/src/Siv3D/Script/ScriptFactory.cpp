@@ -9,13 +9,15 @@
 //
 //-----------------------------------------------
 
-# include "CScript.hpp"
-
+//# include "CScript.hpp"
+#include "IScript.hpp"
+#include<cassert>
 namespace s3d
 {
 	ISiv3DScript* ISiv3DScript::Create()
 	{
-		return new CScript;
+		assert(false);
+		return nullptr;
 	}
 }
 

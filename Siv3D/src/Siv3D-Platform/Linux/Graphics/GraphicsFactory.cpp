@@ -9,12 +9,13 @@
 //
 //-----------------------------------------------
 
-# include <Graphics/GL/CGraphics_GL.hpp>
+//# include <Graphics/GL/CGraphics_GL.hpp>
+# include <Graphics/SDL2/CGraphics_SDL2.hpp>
 
 namespace s3d
 {
 	ISiv3DGraphics* ISiv3DGraphics::Create()
 	{
-		return new CGraphics_GL;
+		return new CGraphics_SDL2;
 	}
 }

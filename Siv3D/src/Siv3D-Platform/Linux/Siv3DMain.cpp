@@ -37,7 +37,7 @@ int main(int, char* argv[])
 {
 	using namespace s3d;
 
-	std::cout << "Siv3D for Linux\n";
+	//std::cout << "Siv3D for Linux\n";
 
 	const FilePath path = Unicode::Widen(argv[0]);
 	FilePath modulePath = FileSystem::ParentPath(path, 0);
@@ -49,7 +49,7 @@ int main(int, char* argv[])
 
 	detail::init::SetModulePath(modulePath);
 
-	chdir(FileSystem::ParentPath(path, 0).narrow().c_str());
+	//chdir(FileSystem::ParentPath(path, 0).narrow().c_str());
 
 	Siv3DEngine engine;
 
@@ -70,4 +70,5 @@ int main(int, char* argv[])
 	Main();
 
 	//Logger.writeRawHTML_UTF8(u8"<hr width=\"99%\">");
+
 }

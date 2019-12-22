@@ -21,7 +21,7 @@
 # include "GIF/ImageFormat_GIF.hpp"
 # include "PPM/ImageFormat_PPM.hpp"
 # include "TGA/ImageFormat_TGA.hpp"
-# include "WebP/ImageFormat_WebP.hpp"
+//# include "WebP/ImageFormat_WebP.hpp"
 
 namespace s3d
 {
@@ -41,11 +41,11 @@ namespace s3d
 
 		m_imageFormats.push_back(std::make_unique<ImageFormat_BMP>());
 		m_imageFormats.push_back(std::make_unique<ImageFormat_PNG>());
-		m_imageFormats.push_back(std::make_unique<ImageFormat_JPEG>());
-		m_imageFormats.push_back(std::make_unique<ImageFormat_GIF>());
-		m_imageFormats.push_back(std::make_unique<ImageFormat_PPM>());
-		m_imageFormats.push_back(std::make_unique<ImageFormat_TGA>());
-		m_imageFormats.push_back(std::make_unique<ImageFormat_WebP>());
+		//m_imageFormats.push_back(std::make_unique<ImageFormat_JPEG>());
+		//m_imageFormats.push_back(std::make_unique<ImageFormat_GIF>());
+		//m_imageFormats.push_back(std::make_unique<ImageFormat_PPM>());
+		//m_imageFormats.push_back(std::make_unique<ImageFormat_TGA>());
+		//m_imageFormats.push_back(std::make_unique<ImageFormat_WebP>());
 
 		Array<String> extensions;
 		for (const auto& format : m_imageFormats)
@@ -186,12 +186,12 @@ namespace s3d
 		{
 			return false;
 		}
-
+/*
 		if (const ImageFormat_JPEG* jpeg = dynamic_cast<ImageFormat_JPEG*>(p->get()))
 		{
 			return jpeg->encode(image, writer, quality);
 		}
-
+*/
 		return false;
 	}
 
@@ -203,12 +203,12 @@ namespace s3d
 		{
 			return false;
 		}
-
+/*
 		if (const ImageFormat_PPM* ppm = dynamic_cast<ImageFormat_PPM*>(p->get()))
 		{
 			return ppm->encode(image, writer, type);
 		}
-
+*/
 		return false;
 	}
 
@@ -220,11 +220,12 @@ namespace s3d
 		{
 			return false;
 		}
-
+/*
 		if (const ImageFormat_WebP* webP = dynamic_cast<ImageFormat_WebP*>(p->get()))
 		{
 			return webP->encode(image, writer, lossless, quality, method);
 		}
+		*/
 
 		return false;
 	}

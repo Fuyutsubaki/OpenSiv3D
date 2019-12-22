@@ -9,12 +9,12 @@
 //
 //-----------------------------------------------
 
-# include <Texture/GL/CTexture_GL.hpp>
+# include <Texture/SDL2/CTexture_SDL2.hpp>
 
 namespace s3d
 {
 	ISiv3DTexture* ISiv3DTexture::Create()
 	{
-		return new CTexture_GL;
+		return new CTexture_SDL2;
 	}
 }

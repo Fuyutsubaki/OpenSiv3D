@@ -12,9 +12,9 @@
 # include <sys/stat.h>
 # include <stdlib.h>
 # include <string>
-# include <boost/filesystem.hpp>
-# include <glib-2.0/glib.h>
-# include <glib-2.0/gio/gio.h>
+//# include <boost/filesystem.hpp>
+//# include <glib-2.0/glib.h>
+//# include <glib-2.0/gio/gio.h>
 # include <Siv3D/FileSystem.hpp>
 # include <Siv3D/String.hpp>
 # include <Siv3D/Time.hpp>
@@ -26,10 +26,11 @@ using namespace s3d;
 
 namespace s3d
 {
-	namespace fs = boost::filesystem;
+	//namespace fs = boost::filesystem;
 	
 	namespace detail
 	{
+		/*
 		std::string Linux_SpecialFolder(const int folder)
 		{
 			const GUserDirectory folders[] =
@@ -86,7 +87,7 @@ namespace s3d
 			}
 
 			return true;
-		}
+		}*/
 
 		static bool GetStat(const FilePathView path, struct stat& s)
 		{
@@ -159,7 +160,7 @@ namespace s3d
 
 			return name;
 		}
-
+/*
 		bool CopyDirectory(const fs::path& source, const fs::path& destination)
 		{
 			try
@@ -208,10 +209,11 @@ namespace s3d
 
 			return true;
 		}
-
+*/
 		namespace init
 		{
-			const static FilePath g_initialPath = NormalizePath(Unicode::Widen(fs::current_path().string()));
+			const static FilePath g_initialPath = U"";
+			//const static FilePath g_initialPath = NormalizePath(Unicode::Widen(fs::current_path().string()));
 
 			static FilePath g_modulePath;
 
@@ -233,7 +235,7 @@ namespace s3d
 
 			return !detail::IsNotFound(path);
 		}
-
+/*
 		bool IsDirectory(const FilePathView path)
 		{
 			if (path.isEmpty())
@@ -253,7 +255,7 @@ namespace s3d
 
 			return detail::IsRegular(path);
 		}
-
+ */
 		bool IsResource(const FilePathView path)
 		{
 			const FilePath resourcePath = FileSystem::ModulePath() + U"/resources/";
@@ -263,6 +265,9 @@ namespace s3d
 
 		FilePath FullPath(const FilePathView path)
 		{
+			return FilePath();
+
+			/*
 			if (path.isEmpty())
 			{
 				return FilePath();
@@ -276,6 +281,7 @@ namespace s3d
 			{
 				return detail::NormalizePath(Unicode::Widen(fs::canonical(fs::path(Unicode::ToWString(path))).string()));
 			}
+ */
 		}
 
 		Platform::NativeFilePath NativePath(const FilePathView path)
@@ -289,7 +295,7 @@ namespace s3d
 			// [Siv3D ToDo]
 			return FilePath(1, U'/');
 		}
-
+/*
 		bool IsEmptyDirectory(const FilePathView path)
 		{
 			if (path.isEmpty())
@@ -318,47 +324,10 @@ namespace s3d
 				return false;
 			}
 		}
-
+*/
 		int64 Size(const FilePathView path)
 		{
-			if (path.isEmpty())
-			{
-				return 0;
-			}
-
-			struct stat s;
-			if (!detail::GetStat(FilePath(path), s))
-			{
-				return 0;
-			}
-
-			if (S_ISREG(s.st_mode))
-			{
-				return s.st_size;
-			}
-			else if (S_ISDIR(s.st_mode))
-			{
-				int64 result = 0;
-
-				for (const auto& v : fs::recursive_directory_iterator(Unicode::ToWString(path)))
-				{
-					struct stat s;
-
-					if (::stat(v.path().c_str(), &s) != 0 || S_ISDIR(s.st_mode))
-					{
-						continue;
-					}
-
-					result += s.st_size;
-				}
-
-				return result;
-			}
-			else
-			{
-				// [Siv3D ToDo]
-				return 0;
-			}
+			return 0;
 		}
 
 		int64 FileSize(const FilePathView path)
@@ -381,7 +350,7 @@ namespace s3d
 
 			return s.st_size;
 		}
-
+/*
 		Optional<DateTime> CreationTime(const FilePathView path)
 		{
 			struct stat s;
@@ -430,7 +399,7 @@ namespace s3d
 			return DateTime((1900 + lt.tm_year), (1 + lt.tm_mon), (lt.tm_mday),
 					lt.tm_hour, lt.tm_min, lt.tm_sec, static_cast<int32>(tv.tv_nsec / (1000 * 1000)));
 		}
-
+		 
 		Array<FilePath> DirectoryContents(const FilePath& path, const bool recursive)
 		{
 			Array<FilePath> paths;
@@ -457,7 +426,7 @@ namespace s3d
 
 			return paths;
 		}
-
+*/
 		const FilePath& InitialDirectory()
 		{
 			return detail::init::g_initialPath;
@@ -470,7 +439,7 @@ namespace s3d
 
 		FilePath CurrentDirectory()
 		{
-			return detail::NormalizePath(Unicode::Widen(fs::current_path().string()));
+			return U"/"; //detail::NormalizePath(Unicode::Widen(fs::current_path().string()));
 		}
 
 		/*
@@ -482,9 +451,11 @@ namespace s3d
 
 		FilePath SpecialFolderPath(const SpecialFolder folder)
 		{
-			return Unicode::Widen(detail::Linux_SpecialFolder(static_cast<int>(folder))) << U'/';
+			assert(false);
+			return U"";
+			//return Unicode::Widen(detail::Linux_SpecialFolder(static_cast<int>(folder))) << U'/';
 		}
-
+/*
 		FilePath TemporaryDirectoryPath()
 		{
 			return Unicode::Widen(fs::temp_directory_path().string());
@@ -585,29 +556,10 @@ namespace s3d
 
 			return Unicode::Widen(output.string()).replace(U'\\', U'/');
 		}
-
+*/
 		bool CreateDirectories(const FilePathView path)
 		{
-			if (path.isEmpty())
-			{
-				return false;
-			}
-
-			try
-			{
-				if (fs::create_directories(fs::path(Unicode::ToWString(path))))
-				{
-					return true;
-				}
-				else
-				{
-					return true;
-				}
-			}
-			catch (const fs::filesystem_error&)
-			{
-				return false;
-			}
+			return false;
 		}
 
 		bool CreateParentDirectories(const FilePathView path)
@@ -626,7 +578,7 @@ namespace s3d
 
 			return true;
 		}
-
+/*
 		bool Copy(const FilePathView from, const FilePathView _to, const CopyOption copyOption)
 		{
 			if (from.isEmpty() || _to.isEmpty())
@@ -726,7 +678,7 @@ namespace s3d
 
 			return (ec.value() == 0);
 		}
-
+*/
 		bool IsSandBoxed()
 		{
 			return false;

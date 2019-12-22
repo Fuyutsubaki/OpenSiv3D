@@ -125,7 +125,8 @@ the parameters of SFMT
 
 # elif defined(HAVE_SSE2)
 
-	# include <emmintrin.h>
+	//# include <emmintrin.h>
+	#include <Siv3D/SSE2.hpp>
 
 # endif
 

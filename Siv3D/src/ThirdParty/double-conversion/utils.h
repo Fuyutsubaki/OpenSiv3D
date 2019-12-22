@@ -106,6 +106,7 @@ int main(int argc, char** argv) {
 #else
 #undef DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS
 #endif  // _WIN32
+#elif defined(__EMSCRIPTEN__)
 #else
 #error Target architecture was not detected as supported by Double-Conversion.
 #endif

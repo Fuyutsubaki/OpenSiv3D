@@ -12,7 +12,7 @@
 # include <AudioFormat/WAVE/AudioFormat_WAVE.hpp>
 # include <AudioFormat/MP3/AudioFormat_MP3.hpp>
 # include <AudioFormat/AAC/AudioFormat_AAC.hpp>
-# include <AudioFormat/OggVorbis/AudioFormat_OggVorbis.hpp>
+//# include <AudioFormat/OggVorbis/AudioFormat_OggVorbis.hpp>
 # include <Siv3D/IReader.hpp>
 # include <Siv3D/BinaryReader.hpp>
 # include <Siv3D/FileSystem.hpp>
@@ -81,7 +81,7 @@ namespace s3d
 
 	# endif
 
-		m_audioFormats.push_back(std::make_unique<AudioFormat_OggVorbis>());
+		//m_audioFormats.push_back(std::make_unique<AudioFormat_OggVorbis>());
 
 		LOG_INFO(U"ℹ️ CAudioFormat initialized");
 	}
@@ -194,11 +194,11 @@ namespace s3d
 		{
 			return false;
 		}
-
+/*
 		if (const AudioFormat_OggVorbis * wav = dynamic_cast<AudioFormat_OggVorbis*>(p->get()))
 		{
 			return wav->encode(wave, quality, writer);
-		}
+		}*/
 
 		return false;
 	}

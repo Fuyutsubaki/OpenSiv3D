@@ -74,6 +74,17 @@
 	# undef SIV3D_PRIVATE_DEFINITION_LINUX
 	# define SIV3D_PRIVATE_DEFINITION_LINUX() 1
 
+# elif defined(__EMSCRIPTEN__)
+
+	/// <summary>
+	/// ターゲットプラットフォームの名前
+	/// Name of the Target Platform
+	/// </summary>
+	# define SIV3D_PLATFORM_NAME	U"Web"
+
+	# undef SIV3D_PRIVATE_DEFINITION_WEB
+	# define SIV3D_PRIVATE_DEFINITION_WEB() 1
+
 # else
 
 	# error Unsupported platform
@@ -115,7 +126,7 @@
 //
 //////////////////////////////////////////////////
 
-# if SIV3D_PLATFORM(WINDOWS) || SIV3D_PLATFORM(MACOS) || SIV3D_PLATFORM(LINUX)
+# if SIV3D_PLATFORM(WINDOWS) || SIV3D_PLATFORM(MACOS) || SIV3D_PLATFORM(LINUX) ||  SIV3D_PLATFORM(WEB)
 
 	# define SIV3D_HAVE_SSE2
 
@@ -133,7 +144,7 @@
 //
 //////////////////////////////////////////////////
 
-# if SIV3D_PLATFORM(WINDOWS)
+# if SIV3D_PLATFORM(WINDOWS) ||  SIV3D_PLATFORM(WEB)
 
 	# define SIV3D_HAVE_M128_MEMBERS
 

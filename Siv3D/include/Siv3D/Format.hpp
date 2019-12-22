@@ -10,7 +10,8 @@
 //-----------------------------------------------
 
 # pragma once
-# include <xmmintrin.h>
+//# include <xmmintrin.h>
+#include "SSE2.hpp"
 # include <sstream>
 # include "Fwd.hpp"
 # include "FormatBool.hpp"

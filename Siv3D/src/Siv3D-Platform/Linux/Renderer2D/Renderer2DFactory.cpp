@@ -9,12 +9,12 @@
 //
 //-----------------------------------------------
 
-# include <Renderer2D/GL/CRenderer2D_GL.hpp>
+# include <Renderer2D/SDL2/CRenderer2D_SDL2.hpp>
 
 namespace s3d
 {
 	ISiv3DRenderer2D* ISiv3DRenderer2D::Create()
 	{
-		return new CRenderer2D_GL;
+		return new CRenderer2D_SDL2;
 	}
 }

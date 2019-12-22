@@ -73,9 +73,9 @@ namespace s3d
 
 		struct Logger_impl
 		{
-			void writeln(const String& text) const;
+			void writeln(const String& text) const{}
 
-			void operator()(const String& text) const;
+			void operator()(const String& text) const{}
 
 			template <class... Args>
 			void operator()(const Args&... args) const
@@ -93,13 +93,13 @@ namespace s3d
 				return buf;
 			}
 
-			void setOutputLevel(OutputLevel level) const;
+			void setOutputLevel(OutputLevel level) const{}
 
-			void _outputLog(LogDescription desc, const String& text) const;
+			void _outputLog(LogDescription desc, const String& text) const{}
 
-			void _outputLogOnce(LogDescription desc, uint32 id, const String& text) const;
+			void _outputLogOnce(LogDescription desc, uint32 id, const String& text) const{}
 
-			void writeRawHTML_UTF8(std::string_view htmlText) const;
+			void writeRawHTML_UTF8(std::string_view htmlText) const{}
 		};
 	}
 

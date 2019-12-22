@@ -11,7 +11,8 @@
 
 # pragma once
 # include <cfloat>
-# include <emmintrin.h>
+# include <Siv3D/SSE2.hpp>
+//# include <emmintrin.h>
 # include <numeric>
 # include "Utility.hpp"
 # include "PointVector.hpp"

@@ -90,40 +90,40 @@ namespace s3d
 		inline static Siv3DEngine* pEngine = nullptr;
 
 		std::tuple<
-			  Siv3DComponent<ISiv3DLicenseManager>
-			, Siv3DComponent<ISiv3DLogger>
-			, Siv3DComponent<ISiv3DSystem>
-			, Siv3DComponent<ISiv3DCPU>
+			  //Siv3DComponent<ISiv3DLicenseManager>
+			//, Siv3DComponent<ISiv3DLogger>
+			 Siv3DComponent<ISiv3DSystem>
+			//, Siv3DComponent<ISiv3DCPU>
 			, Siv3DComponent<ISiv3DProfiler>
 			, Siv3DComponent<ISiv3DImageFormat>
-			, Siv3DComponent<ISiv3DObjectDetection>
+			//, Siv3DComponent<ISiv3DObjectDetection>
 			, Siv3DComponent<ISiv3DWindow>
-			, Siv3DComponent<ISiv3DConsole>
-			, Siv3DComponent<ISiv3DCursor>
-			, Siv3DComponent<ISiv3DKeyboard>
-			, Siv3DComponent<ISiv3DMouse>
-			, Siv3DComponent<ISiv3DGamepad>
-			, Siv3DComponent<ISiv3DXInput>
-			, Siv3DComponent<ISiv3DTextInput>
-			, Siv3DComponent<ISiv3DTextToSpeech>
-			, Siv3DComponent<ISiv3DClipboard>
-			, Siv3DComponent<ISiv3DDragDrop>
-			, Siv3DComponent<ISiv3DCodec>
-			, Siv3DComponent<ISiv3DAudioFormat>
-			, Siv3DComponent<ISiv3DSoundFont>
-			, Siv3DComponent<ISiv3DAudio>
-			, Siv3DComponent<ISiv3DFFT>
-			, Siv3DComponent<ISiv3DNetwork>
+			//, Siv3DComponent<ISiv3DConsole>
+			//, Siv3DComponent<ISiv3DCursor>
+			//, Siv3DComponent<ISiv3DKeyboard>
+			//, Siv3DComponent<ISiv3DMouse>
+			//, Siv3DComponent<ISiv3DGamepad>
+			//, Siv3DComponent<ISiv3DXInput>
+			//, Siv3DComponent<ISiv3DTextInput>
+			//, Siv3DComponent<ISiv3DTextToSpeech>
+			//, Siv3DComponent<ISiv3DClipboard>
+			//, Siv3DComponent<ISiv3DDragDrop>
+			//, Siv3DComponent<ISiv3DCodec>
+			//, Siv3DComponent<ISiv3DAudioFormat>
+			//, Siv3DComponent<ISiv3DSoundFont>
+			//, Siv3DComponent<ISiv3DAudio>
+			//, Siv3DComponent<ISiv3DFFT>
+			//, Siv3DComponent<ISiv3DNetwork>
 			, Siv3DComponent<ISiv3DGraphics>
-			, Siv3DComponent<ISiv3DShader>
+			//, Siv3DComponent<ISiv3DShader>
 			, Siv3DComponent<ISiv3DTexture>
 			, Siv3DComponent<ISiv3DRenderer2D>
-			, Siv3DComponent<ISiv3DScreenCapture>
-			, Siv3DComponent<ISiv3DFont>
-			, Siv3DComponent<ISiv3DGUI>
-			, Siv3DComponent<ISiv3DEffect>
-			, Siv3DComponent<ISiv3DPrint>
-			, Siv3DComponent<ISiv3DScript>
+			//, Siv3DComponent<ISiv3DScreenCapture>
+			//, Siv3DComponent<ISiv3DFont>
+			//, Siv3DComponent<ISiv3DGUI>
+			//, Siv3DComponent<ISiv3DEffect>
+			//, Siv3DComponent<ISiv3DPrint>
+			//, Siv3DComponent<ISiv3DScript>
 			, Siv3DComponent<ISiv3DAsset>
 		> m_interfaces;
 
