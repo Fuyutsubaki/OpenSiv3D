@@ -6,7 +6,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 
 set(CMAKE_CXX_COMPILER "em++")
-set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra -Wno-unknown-pragmas -fPIC -s WASM=1 -s USE_SDL=2 -msimd128 -s USE_LIBPNG=1")
+set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra -Wno-unknown-pragmas -fPIC -s WASM=1 -s USE_SDL=2 -msimd128 -s USE_LIBPNG=1 -s USE_FREETYPE=1 -s USE_HARFBUZZ=1")
 
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -O0 -pg -DDEBUG")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -march=x86-64")
@@ -14,7 +14,7 @@ set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-g3 -Og -pg")
 set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG -march=x86-64")
 
 set(CMAKE_C_COMPILER "emcc")
-set(CMAKE_C_FLAGS "-std=c++17 -Wall -Wextra -Wno-unknown-pragmas -fPIC s WASM=1 -s USE_SDL=2 -msimd128 -s USE_LIBPNG=1")
+set(CMAKE_C_FLAGS "-std=c++17 -Wall -Wextra -Wno-unknown-pragmas -fPIC s WASM=1 -s USE_SDL=2 -msimd128 -s USE_LIBPNG=1 -s USE_FREETYPE=1 -s USE_HARFBUZZ=1")
 
 set(CMAKE_C_FLAGS_DEBUG "-g3 -O0 -pg -DDEBUG")
 set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG -march=x86-64")
@@ -29,7 +29,8 @@ include_directories(
 	"../Siv3D/src/Siv3D"
 	"../Siv3D/src/Siv3D-Platform/Linux"
 	"../Siv3D/include/ThirdParty"
-	"../Siv3D/src/ThirdParty"
+	"../Siv3D/src/ThirdParty" 
+	"/usr/include/freetype2"  # freetype
 
 	#"../Siv3D/src/ThirdParty/asio"
 	"../Siv3D/src/ThirdParty/zstd"
@@ -94,7 +95,7 @@ set(SOURCE_FILES
 	#"../Siv3D/src/Siv3D/DragDrop/DragDropFactory.cpp"
 	#"../Siv3D/src/Siv3D/DragDrop/SivDragDrop.cpp"
 	"../Siv3D/src/Siv3D/Duration/SivDuration.cpp"
-	#"../Siv3D/src/Siv3D/DynamicTexture/SivDynamicTexture.cpp"
+	"../Siv3D/src/Siv3D/DynamicTexture/SivDynamicTexture.cpp"
 	#"../Siv3D/src/Siv3D/Easing/SivEasing.cpp"
 	#"../Siv3D/src/Siv3D/Effect/CEffect.cpp"
 	#"../Siv3D/src/Siv3D/Effect/EffectData.cpp"
@@ -102,7 +103,7 @@ set(SOURCE_FILES
 	#"../Siv3D/src/Siv3D/Effect/SivEffect.cpp"
 	#"../Siv3D/src/Siv3D/Ellipse/SivEllipse.cpp"
 	#"../Siv3D/src/Siv3D/Emitter2D/SivEmitter2D.cpp"
-	#"../Siv3D/src/Siv3D/Emoji/SivEmoji.cpp"
+	#"../Siv3D/src/Siv3D/Emoji/SivEmoji.cpp"    # なぜか FT_Load_Glyphが36を返す。要調査
 	#"../Siv3D/src/Siv3D/EmojiDictionary/EmojiDictionaryDetail.cpp"
 	#"../Siv3D/src/Siv3D/EmojiDictionary/SivEmojiDictionary.cpp"
 	"../Siv3D/src/Siv3D/EngineDirectory/EngineDirectory.cpp"
@@ -113,12 +114,12 @@ set(SOURCE_FILES
 	#"../Siv3D/src/Siv3D/FFT/SivFFT.cpp"
 	#"../Siv3D/src/Siv3D/FileFilter/SivFileFilter.cpp"
 	"../Siv3D/src/Siv3D/FileSystem/SivFileSystem.cpp"
-	#"../Siv3D/src/Siv3D/Font/CFont.cpp"
-	#"../Siv3D/src/Siv3D/Font/FontFace.cpp"
-	#"../Siv3D/src/Siv3D/Font/FontFactory.cpp"
-	#"../Siv3D/src/Siv3D/Font/SivFont.cpp"
-	#"../Siv3D/src/Siv3D/Font/FontData.cpp"
-	#"../Siv3D/src/Siv3D/FontAsset/SivFontAsset.cpp"
+	"../Siv3D/src/Siv3D/Font/CFont.cpp"
+	"../Siv3D/src/Siv3D/Font/FontFace.cpp"
+	"../Siv3D/src/Siv3D/Font/FontFactory.cpp"
+	"../Siv3D/src/Siv3D/Font/SivFont.cpp"
+	"../Siv3D/src/Siv3D/Font/FontData.cpp"
+	"../Siv3D/src/Siv3D/FontAsset/SivFontAsset.cpp"
 	"../Siv3D/src/Siv3D/Format/SivFormat.cpp"
 	"../Siv3D/src/Siv3D/FormatFloat/SivFormatFloat.cpp"
 	"../Siv3D/src/Siv3D/FormatInt/SivFormatInt.cpp"
@@ -189,9 +190,9 @@ set(SOURCE_FILES
 	#"../Siv3D/src/Siv3D/ObjectDetection/CObjectDetection.cpp"
 	#"../Siv3D/src/Siv3D/ObjectDetection/ObjectDetectionFactory.cpp"
 	"../Siv3D/src/Siv3D/OpenCV_Bridge/SivOpenCV_Bridge.cpp"
-	#"../Siv3D/src/Siv3D/OutlineGlyph/SivOutlineGlyph.cpp"
+	"../Siv3D/src/Siv3D/OutlineGlyph/SivOutlineGlyph.cpp"
 	#"../Siv3D/src/Siv3D/Painting/PaintShape.cpp"
-	#"../Siv3D/src/Siv3D/Painting/SivPainting.cpp"
+	"../Siv3D/src/Siv3D/Painting/SivPainting.cpp"
 	#"../Siv3D/src/Siv3D/Parse/SivParse.cpp"
 	#"../Siv3D/src/Siv3D/ParseBool/SivParseBool.cpp"
 	#"../Siv3D/src/Siv3D/ParseFloat/SivParseFloat.cpp"

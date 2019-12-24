@@ -509,7 +509,8 @@ namespace s3d
 
 	Rect DrawableText::overwrite(Image& dst, const Point& pos, const Color& color) const
 	{
-		return Siv3DEngine::Get<ISiv3DFont>()->overwrite(font.id(), dst, text, pos, color, 1.0);
+		assert(false);
+		//return Siv3DEngine::Get<ISiv3DFont>()->overwrite(font.id(), dst, text, pos, color, 1.0);
 	}
 
 	RectF DrawableText::overwriteAt(Image& dst, const int32 x, const int32 y, const Color& color) const

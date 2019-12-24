@@ -13,7 +13,7 @@
 # include <Siv3D/EngineError.hpp>
 # include <Siv3D/Resource.hpp>
 # include <Siv3D/FileSystem.hpp>
-# include <Siv3D/Compression.hpp>
+//# include <Siv3D/Compression.hpp>
 # include <Siv3D/Image.hpp>
 # include <EngineDirectory/EngineDirectory.hpp>
 # include "CFont.hpp"
@@ -54,14 +54,16 @@ namespace s3d
 
 		[[nodiscard]] static FilePath GetEngineFontDirectory()
 		{
-			return EngineDirectory::CurrectVersionCommon() + U"font/";
+			//return EngineDirectory::CurrectVersionCommon() + U"font/";
+			return U"engine/font/";
+
 		}
 
 		[[nodiscard]] FilePath GetEngineFontPath(const Typeface typeface)
 		{
 			return GetEngineFontDirectory() + StandardFontNames[FromEnum(typeface)];
 		}
-
+/*
 		[[nodiscard]] static bool ExtractFontFiles()
 		{
 			const FilePath fontDirectory = EngineDirectory::CurrectVersionCommon() + U"font/";
@@ -82,6 +84,7 @@ namespace s3d
 
 			return true;
 		}
+*/
 	}
 
 	CFont::CFont()
@@ -113,12 +116,12 @@ namespace s3d
 		{
 			throw EngineError(U"FT_Init_FreeType() faild");
 		}
-
+		/*
 		if (!detail::ExtractFontFiles())
 		{
 			throw EngineError(U"ExtractFontFiles() faild");
 		}
-
+ 		*/
 		if (!loadColorEmojiFace())
 		{
 			LOG_INFO(U"ℹ️ ColorEmoji not included");

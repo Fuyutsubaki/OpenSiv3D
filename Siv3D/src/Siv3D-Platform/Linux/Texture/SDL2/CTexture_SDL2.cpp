@@ -116,7 +116,6 @@ namespace s3d
 
 	TextureID CTexture_SDL2::create(const Image& image, const Array<Image>& mips, const TextureDesc desc)
 	{
-		assert(false);/*
 		if (!image)
 		{
 			return TextureID::NullAsset();
@@ -135,7 +134,6 @@ namespace s3d
 		}
 		
 		return m_textures.add(std::move(texture), U"(size:{0}x{1})"_fmt(image.width(), image.height()));
-		 */
 	}
 
 	TextureID CTexture_SDL2::createDynamic(const Size& size, const void* pData, const uint32 stride, const TextureFormat format, const TextureDesc desc)

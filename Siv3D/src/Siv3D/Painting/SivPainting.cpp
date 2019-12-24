@@ -9,7 +9,7 @@
 //
 //-----------------------------------------------
 
-# include <smmintrin.h>
+//# include <smmintrin.h>
 # include <opencv2/imgproc.hpp>
 # include <Siv3D/Image.hpp>
 # include <Siv3D/ImageRegion.hpp>
@@ -28,6 +28,7 @@ namespace s3d
 {
 	namespace detail
 	{
+/*
 		namespace simd
 		{
 			static const __m128 c255 = ::_mm_set_ps1(255.0f);
@@ -372,7 +373,7 @@ namespace s3d
 				}
 			}
 		}
-
+ */
 		static void WriteReference(
 			const Color* pSrc,
 			Color* pDst,
@@ -494,7 +495,7 @@ namespace s3d
 				}
 			}
 		}
-
+/*
 		static void OverwriteSSE4_1(
 			const Color* pSrc,
 			Color* pDst,
@@ -592,7 +593,7 @@ namespace s3d
 				}
 			}
 		}
-
+ */
 		static void OverwriteReference(
 			const Color* pSrc,
 			Color* pDst,
@@ -733,7 +734,7 @@ namespace s3d
 
 		const int32 srcWidth = src.width();
 		const int32 dstWidth = dst.width();
-
+/*
 		const CPUFeature cpu = CPU::GetFeature();
 
 		if (cpu.SSE41)
@@ -745,6 +746,7 @@ namespace s3d
 			detail::WriteSSE3(pSrc, pDst, writeWidth, writeHeight, srcWidth, dstWidth, color);
 		}
 		else
+	*/
 		{
 			detail::WriteReference(pSrc, pDst, writeWidth, writeHeight, srcWidth, dstWidth, color);
 		}
@@ -784,7 +786,7 @@ namespace s3d
 
 		const int32 srcWidth = src.width();
 		const int32 dstWidth = dst.width();
-
+/*
 		const CPUFeature cpu = CPU::GetFeature();
 
 		if (cpu.SSE41)
@@ -796,6 +798,7 @@ namespace s3d
 			detail::OverwriteSSE3(pSrc, pDst, writeWidth, writeHeight, srcWidth, dstWidth, color);
 		}
 		else
+		*/
 		{
 			detail::OverwriteReference(pSrc, pDst, writeWidth, writeHeight, srcWidth, dstWidth, color);
 		}
@@ -858,7 +861,7 @@ namespace s3d
 
 		const int32 srcWidth = src.width();
 		const int32 dstWidth = dst.width();
-
+/*
 		const CPUFeature cpu = CPU::GetFeature();
 
 		if (cpu.SSE41)
@@ -870,6 +873,7 @@ namespace s3d
 			detail::WriteSSE3(pSrc, pDst, writeWidth, writeHeight, srcWidth, dstWidth, color);
 		}
 		else
+		 */
 		{
 			detail::WriteReference(pSrc, pDst, writeWidth, writeHeight, srcWidth, dstWidth, color);
 		}
@@ -932,7 +936,7 @@ namespace s3d
 
 		const int32 srcWidth = src.width();
 		const int32 dstWidth = dst.width();
-
+/*
 		const CPUFeature cpu = CPU::GetFeature();
 
 		if (cpu.SSE41)
@@ -944,6 +948,7 @@ namespace s3d
 			detail::OverwriteSSE3(pSrc, pDst, writeWidth, writeHeight, srcWidth, dstWidth, color);
 		}
 		else
+		 */
 		{
 			detail::OverwriteReference(pSrc, pDst, writeWidth, writeHeight, srcWidth, dstWidth, color);
 		}

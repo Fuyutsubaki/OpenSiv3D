@@ -119,7 +119,7 @@ namespace s3d
 			, Siv3DComponent<ISiv3DTexture>
 			, Siv3DComponent<ISiv3DRenderer2D>
 			//, Siv3DComponent<ISiv3DScreenCapture>
-			//, Siv3DComponent<ISiv3DFont>
+			, Siv3DComponent<ISiv3DFont>
 			//, Siv3DComponent<ISiv3DGUI>
 			//, Siv3DComponent<ISiv3DEffect>
 			//, Siv3DComponent<ISiv3DPrint>

@@ -124,7 +124,7 @@ namespace s3d
 		void addTriangle(const Float2(&pts)[3], const Float4(&colors)[3]) override{}
 
 		void addRect(const FloatRect& rect, const Float4& color) override{
-			SDL_SetRenderDrawColor(m_renderer, color.x*255, color.y*255, color.z*255, color.x*255);
+			SDL_SetRenderDrawColor(m_renderer, color.x*255, color.y*255, color.z*255, color.w*255);
 			SDL_Rect r ={(int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom};
 			SDL_RenderFillRect(m_renderer,&r);
 		}
@@ -166,19 +166,19 @@ namespace s3d
 		void addSprite(const Texture& texture, const Sprite& sprite, uint16 startIndex, uint16 indexCount) override{}
 
 		void addTextureRegion(const Texture& texture, const FloatRect& rect, const FloatRect& uv, const Float4& color) override{
-			SDL_Rect dst ={(int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom};
+			SDL_Rect dst ={(int)rect.left, (int)rect.top, (int)(rect.right-rect.left), (int)(rect.bottom-rect.top)};
 			// 速度や表現について様々な懸念がある
 			CTexture_SDL2* const pTexture = dynamic_cast<CTexture_SDL2* const>(Siv3DEngine::Get<ISiv3DTexture>()); 
 			auto &img = pTexture->getImage(texture.id());
-			SDL_Rect src ={(int)(uv.left*img.width()), (int)(uv.top*img.height()), (int)(uv.right*img.width()), (int)(uv.bottom*img.height())};
-
+			SDL_Rect src ={(int)(uv.left*img.width()), (int)(uv.top*img.height()), (int)((uv.right-uv.left)*img.width()), (int)((uv.bottom-uv.top)*img.height())};
 			auto surf = SDL_CreateRGBSurfaceFrom((void*)img.data(),img.width(),img.height(),32,img.width()*4,0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
 			auto sdl_texture = SDL_CreateTextureFromSurface(m_renderer,surf);
+			SDL_SetTextureColorMod(sdl_texture,(uint8_t)(color.x*255),(uint8_t)(color.y*255),(uint8_t)(color.z*255));
+			SDL_SetTextureAlphaMod(sdl_texture,(uint8_t)(color.w*255));
 			SDL_RenderCopy(m_renderer,sdl_texture,&src,&dst);
 
 			SDL_FreeSurface(surf);
 			SDL_DestroyTexture(sdl_texture);
-
 		}
 
 		void addTextureRegion(const Texture& texture, const FloatRect& rect, const FloatRect& uv, const Float4(&colors)[4]) override{}

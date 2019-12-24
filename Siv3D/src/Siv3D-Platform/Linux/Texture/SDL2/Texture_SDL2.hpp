@@ -35,11 +35,27 @@ namespace s3d
             m_initialized(true)
         {}
 		
-		//Texture_SDL2(const Image& image, const Array<Image>& mipmaps, TextureDesc desc);
+		Texture_SDL2(const Image& image, const Array<Image>& mipmaps, TextureDesc desc)
+			:m_img(image),
+			m_textureDesc(desc),
+			m_isDynamic(false),
+			m_initialized(true)
+		{
+			// mipについて: 無くても動く
+		}
 		
 		Texture_SDL2(const Size& size, const void* pData, uint32 stride, TextureFormat format, TextureDesc desc)
+			:m_img(),
+            m_textureDesc(desc),
+            m_isDynamic(true),// なんでここはtrueなんだ？
+            m_initialized(true)
         {
-            assert(false);
+			auto p = static_cast<uint8_t const*>(pData);// なんかもっときれいな方法あるだろ
+			m_img = Image::Generate(size,[p]()mutable{
+				Color c = {p[0],p[1],p[2],p[3]};
+				p+=4;
+				return c;
+				} );
         }
 		
 		~Texture_SDL2(){}
