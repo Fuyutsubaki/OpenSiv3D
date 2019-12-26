@@ -105,7 +105,7 @@ namespace s3d
 
 		void setScissorRect(const Rect& rect) override{}
 
-		float getMaxScaling() const override{assert(false);}
+		float getMaxScaling() const override{return 1.0;} // setLocalTransform とか
 
 		Rect getScissorRect() const override{{assert(false);}}
 
@@ -125,7 +125,8 @@ namespace s3d
 
 		void addRect(const FloatRect& rect, const Float4& color) override{
 			SDL_SetRenderDrawColor(m_renderer, color.x*255, color.y*255, color.z*255, color.w*255);
-			SDL_Rect r ={(int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom};
+			SDL_SetRenderDrawBlendMode(m_renderer,SDL_BLENDMODE_BLEND);
+			SDL_Rect r ={(int)rect.left, (int)rect.top, (int)(rect.right-rect.left), (int)(rect.bottom-rect.top)};
 			SDL_RenderFillRect(m_renderer,&r);
 		}
 
@@ -151,7 +152,9 @@ namespace s3d
 
 		void addQuad(const FloatQuad& quad, const Float4(&colors)[4]) override{}
 
-		void addRoundRect(const FloatRect& rect, float w, float h, float r, const Float4& color) override{}
+		void addRoundRect(const FloatRect& rect, float w, float h, float r, const Float4& color) override{
+			addRect(rect,color); // todo: ちゃんと実装すべき
+		}
 
 		void addLineString(const LineStyle& style, const Vec2* pts, uint16 size, const Optional<Float2>& offset, float thickness, bool inner, const Float4& color, bool isClosed) override{}
 

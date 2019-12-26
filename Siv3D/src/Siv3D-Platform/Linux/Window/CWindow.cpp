@@ -73,9 +73,7 @@ namespace s3d
 
 	void CWindow::init()
 	{
-		SDL_Init(SDL_INIT_VIDEO); // もっといい場所があるかもしれない
-		m_window= SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 320, 0);
-		std::cout<<(void*)m_window<<std::endl;
+		m_window = SDL_CreateWindow(m_titleText.narrow().c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_state.clientSize.x, m_state.clientSize.y, 0);
 
 		/*
 		LOG_TRACE(U"CWindow::init()");

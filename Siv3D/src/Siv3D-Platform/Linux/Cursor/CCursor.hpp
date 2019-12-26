@@ -15,8 +15,7 @@
 # include <Siv3D/Cursor.hpp>
 # include <Siv3D/Mat3x2.hpp>
 # include <Cursor/ICursor.hpp>
-# include <GL/glew.h>
-# include <GLFW/glfw3.h>
+# include <SDL2/SDL.h>
 
 namespace s3d
 {
@@ -24,7 +23,7 @@ namespace s3d
 	{
 	private:
 
-		GLFWwindow* m_window = nullptr;
+		SDL_Window* m_window = nullptr;
 
 		std::mutex m_mutexMouseMove;
 		Array<std::pair<Point, uint64>> m_buffer_internal;

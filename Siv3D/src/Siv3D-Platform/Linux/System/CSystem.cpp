@@ -43,6 +43,9 @@
 # include <System/CSystem.hpp>
 # include <System/SystemLog.hpp>
 
+#include <Siv3D/Mouse.hpp>
+#include<SDL2/SDL.h>
+
 namespace s3d
 {
 	CSystem::CSystem()
@@ -59,6 +62,8 @@ namespace s3d
 	{
 		LOG_TRACE(U"CSystem::init()");
 		SystemLog::Initial();
+		assert(SDL_Init(SDL_INIT_VIDEO) == 0);
+
 	
 		//Siv3DEngine::Get<ISiv3DCPU>()->init();
 		Siv3DEngine::Get<ISiv3DProfiler>()->init();
@@ -68,7 +73,7 @@ namespace s3d
 
 		//Siv3DEngine::Get<ISiv3DCursor>()->init();
 		//Siv3DEngine::Get<ISiv3DKeyboard>()->init();
-		//Siv3DEngine::Get<ISiv3DMouse>()->init();
+		Siv3DEngine::Get<ISiv3DMouse>()->init();
 		//Siv3DEngine::Get<ISiv3DGamepad>()->init();
 		//Siv3DEngine::Get<ISiv3DXInput>()->init();
 		//Siv3DEngine::Get<ISiv3DTextInput>()->init();
@@ -84,13 +89,13 @@ namespace s3d
 		Siv3DEngine::Get<ISiv3DGraphics>()->init();
 		//Siv3DEngine::Get<ISiv3DScreenCapture>()->init();
 		Siv3DEngine::Get<ISiv3DFont>()->init();
-		//Siv3DEngine::Get<ISiv3DGUI>()->init();
+		Siv3DEngine::Get<ISiv3DGUI>()->init();
 		//Siv3DEngine::Get<ISiv3DEffect>()->init();
 		//Siv3DEngine::Get<ISiv3DPrint>()->init();
 		//Siv3DEngine::Get<ISiv3DAsset>()->init();
 		//Siv3DEngine::Get<ISiv3DScript>()->init();
 
-		//Siv3DEngine::Get<ISiv3DCursor>()->update();
+		Siv3DEngine::Get<ISiv3DCursor>()->update();
 
 
 		m_setupState = SetupState::Initialized;
@@ -110,7 +115,7 @@ namespace s3d
 
 			m_setupState = SetupState::Displayed;
 
-			//Siv3DEngine::Get<ISiv3DCursor>()->applyStyleImmediately(CursorStyle::Default);
+			Siv3DEngine::Get<ISiv3DCursor>()->applyStyleImmediately(CursorStyle::Default);
 		}
 
 		//Siv3DEngine::Get<ISiv3DPrint>()->draw();/*
@@ -125,6 +130,15 @@ namespace s3d
 		{
 			m_terminationTrigger.logExitEvent(event);
 			return false;
+		}
+		SDL_Event e;
+		while(SDL_PollEvent(&e)){
+			if(e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP){
+				Siv3DEngine::Get<ISiv3DMouse>()->onMouseButtonUpdated(to_s3d_mouseevent(e.button.button), e.button.state == SDL_PRESSED );
+			}
+			else if(e.type == SDL_MOUSEWHEEL){
+				Siv3DEngine::Get<ISiv3DMouse>()->onScroll(e.wheel.y,e.wheel.x);
+			}
 		}
 
 		/////////////////////////////////////////////////////
@@ -145,11 +159,12 @@ namespace s3d
 		Siv3DEngine::Get<ISiv3DGraphics>()->clear();/*
 		*///Siv3DEngine::Get<ISiv3DAsset>()->update();
 
-		//Siv3DEngine::Get<ISiv3DCursor>()->update();
+		Siv3DEngine::Get<ISiv3DCursor>()->update();
 		//Siv3DEngine::Get<ISiv3DGamepad>()->update(onDeviceChange);
 		//Siv3DEngine::Get<ISiv3DXInput>()->update(onDeviceChange);
 		//Siv3DEngine::Get<ISiv3DKeyboard>()->update();/*
-		//*///Siv3DEngine::Get<ISiv3DMouse>()->update();/*
+		//*/
+		Siv3DEngine::Get<ISiv3DMouse>()->update();/*
 		//*///Siv3DEngine::Get<ISiv3DTextInput>()->update();
 		//Siv3DEngine::Get<ISiv3DDragDrop>()->update();
 		//Siv3DEngine::Get<ISiv3DLicenseManager>()->update();
@@ -205,5 +220,17 @@ namespace s3d
 		LOG_TRACE(U"CSystem::onDeviceChange()");
 
 		m_onDeviceChange = true;
+	}
+
+	uint8 CSystem::to_s3d_mouseevent(uint8 sdl_button){
+		switch(sdl_button){
+			case SDL_BUTTON_LEFT: return MouseL.code();
+			case SDL_BUTTON_MIDDLE: return MouseM.code();
+			case SDL_BUTTON_RIGHT: return MouseR.code();
+			case SDL_BUTTON_X1: return MouseX1.code();
+			case SDL_BUTTON_X2: return MouseX2.code();
+			default:
+				assert(false);
+		}
 	}
 }

@@ -99,9 +99,9 @@ namespace s3d
 			//, Siv3DComponent<ISiv3DObjectDetection>
 			, Siv3DComponent<ISiv3DWindow>
 			//, Siv3DComponent<ISiv3DConsole>
-			//, Siv3DComponent<ISiv3DCursor>
+			, Siv3DComponent<ISiv3DCursor>
 			//, Siv3DComponent<ISiv3DKeyboard>
-			//, Siv3DComponent<ISiv3DMouse>
+			, Siv3DComponent<ISiv3DMouse>
 			//, Siv3DComponent<ISiv3DGamepad>
 			//, Siv3DComponent<ISiv3DXInput>
 			//, Siv3DComponent<ISiv3DTextInput>
@@ -120,7 +120,7 @@ namespace s3d
 			, Siv3DComponent<ISiv3DRenderer2D>
 			//, Siv3DComponent<ISiv3DScreenCapture>
 			, Siv3DComponent<ISiv3DFont>
-			//, Siv3DComponent<ISiv3DGUI>
+			, Siv3DComponent<ISiv3DGUI>
 			//, Siv3DComponent<ISiv3DEffect>
 			//, Siv3DComponent<ISiv3DPrint>
 			//, Siv3DComponent<ISiv3DScript>

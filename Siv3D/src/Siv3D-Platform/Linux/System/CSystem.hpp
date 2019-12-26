@@ -38,6 +38,7 @@ namespace s3d
 		bool m_updateSucceeded = true;
 
 		std::atomic<bool> m_onDeviceChange = { false };
+		static uint8 to_s3d_mouseevent(uint8 sdl_button);
 
 	public:
 

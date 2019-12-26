@@ -15,9 +15,6 @@
 # include <Siv3D/Optional.hpp>
 # include <Siv3D/PointVector.hpp>
 # include <Mouse/IMouse.hpp>
-# include <GL/glew.h>
-# include <GLFW/glfw3.h>
-
 namespace s3d
 {
 	enum class MouseButtonState
@@ -32,8 +29,6 @@ namespace s3d
 	class CMouse : public ISiv3DMouse
 	{
 	private:
-
-		GLFWwindow* m_glfwWindow = nullptr;
 		
 		std::array<InputState, MouseButtonCount> m_states;
 		
@@ -46,10 +41,6 @@ namespace s3d
 		Vec2 m_scroll{ 0.0, 0.0 };
 		
 		std::array<MouseButtonState, MouseButtonCount> m_buttonsInternal;
-		
-		static void OnScroll(GLFWwindow*, double h, double v);
-		
-		static void OnMouseButtonUpdated(GLFWwindow*, int button, int action, int mods);
 
 	public:
 

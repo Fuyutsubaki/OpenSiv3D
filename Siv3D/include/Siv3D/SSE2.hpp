@@ -86,6 +86,29 @@ inline constexpr __m128i _mm_castps_si128(__m128 _A) {
     return {.m128i_i64 = {_A.m128_i64[0], _A.m128_i64[1]}};
 }
 
+inline constexpr __m128i _mm_and_si128(__m128i a, __m128i b){
+    return {.m128i_i64 = {a.m128i_i64[0] & b.m128i_i64[0], a.m128i_i64[1] & b.m128i_i64[1]}};
+}
+inline constexpr __m128i _mm_or_si128(__m128i a, __m128i b){
+    return {.m128i_i64 = {a.m128i_i64[0] | b.m128i_i64[0], a.m128i_i64[1] | b.m128i_i64[1]}};
+}
+inline constexpr __m128i _mm_xor_si128(__m128i a, __m128i b){
+    return {.m128i_i64 = {a.m128i_i64[0] ^ b.m128i_i64[0], a.m128i_i64[1] ^ b.m128i_i64[1]}};
+}
+inline constexpr __m128i _mm_slli_epi32(__m128i a, int count){
+    return {.m128i_u32 = {a.m128i_u32[0]<<count,a.m128i_u32[1]<<count,a.m128i_u32[2]<<count,a.m128i_u32[3]<<count}};
+}
+inline constexpr __m128i _mm_srli_epi32(__m128i a, int count){
+    return {.m128i_u32 = {a.m128i_u32[0]>>count,a.m128i_u32[1]>>count,a.m128i_u32[2]>>count,a.m128i_u32[3]>>count}};
+}
+inline constexpr __m128i _mm_slli_si128(__m128i a, int imm){
+    // todo: 適当な実装
+    return {.m128i_u64 = {(a.m128i_u64[0]<<imm) | (a.m128i_u64[1]>>(64-imm)), a.m128i_u64[1]<<imm }};
+}
+inline constexpr __m128i _mm_srli_si128(__m128i a, int imm){
+    // todo: 適当な実装
+    return {.m128i_u64 = {a.m128i_u64[0]>>imm, (a.m128i_u64[0]<<(64-imm)) | (a.m128i_u64[1]>>imm) }};
+}
 inline constexpr int _mm_cvtsi128_si32(__m128i _A) {
     return _A.m128i_i32[0];
 }
@@ -181,7 +204,7 @@ inline constexpr  void _mm_stream_ps(float *, __m128);
 inline constexpr  void _mm_sfence(void);
 
 inline constexpr  __m128i _mm_shuffle_epi32(__m128i _A, int _Imm);
-inline constexpr  __m128i _mm_srli_si128(__m128i _A, int _Imm);
+inline constexpr  __m128i _mm_slli_si128(__m128i _A, int _Imm);
 inline constexpr   void _mm_storeu_ps(float *_V, __m128 _A);
 __m128 _mm_loadu_ps(float const*_A);
 __m128 _mm_unpackhi_ps(__m128 _A, __m128 _B);

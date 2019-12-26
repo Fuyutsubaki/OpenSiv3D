@@ -18,12 +18,8 @@
 # include <Renderer2D/IRenderer2D.hpp>
 # include "CCursor.hpp"
 
-# include <GLFW/glfw3.h>
+#include <SDL2/SDL.h>
 
-extern "C"
-{
-	GLFWAPI void siv3dGetRootCursorPos(GLFWwindow* window, double* root_x, double* root_y);
-}
 
 namespace s3d
 {
@@ -40,7 +36,7 @@ namespace s3d
 	{
 		LOG_TRACE(U"CCursor::init()");
 
-		m_window = static_cast<GLFWwindow*>(Siv3DEngine::Get<ISiv3DWindow>()->getHandle());
+		m_window = static_cast<SDL_Window*>(Siv3DEngine::Get<ISiv3DWindow>()->getHandle());
 
 		LOG_INFO(U"ℹ️ CCursor initialized");
 	}
@@ -52,12 +48,11 @@ namespace s3d
 			// [Siv3D ToDo]
 		}
 
-		double clientX, clientY, rootX, rootY;
-		::glfwGetCursorPos(m_window, &clientX, &clientY);
-		::siv3dGetRootCursorPos(m_window, &rootX, &rootY);
+		int x,y;
+		SDL_GetMouseState(&x,&y);
 
-		m_screen.update(rootX, rootY);
-		m_client_raw.update(clientX, clientY);
+		m_screen.update(x, y); // setする値がこれでいいのかは怪しい
+		m_client_raw.update(x, y);
 
 		{
 			if (Scene::GetScaleMode() == ScaleMode::AspectFit)
@@ -152,7 +147,7 @@ namespace s3d
 
 	void CCursor::setPos(const Point& pos)
 	{
-		::glfwSetCursorPos(m_window, pos.x, pos.y);
+		SDL_WarpMouseInWindow(m_window, pos.x, pos.y);
 	}
 
 	void CCursor::setLocalTransform(const Mat3x2& matrix)

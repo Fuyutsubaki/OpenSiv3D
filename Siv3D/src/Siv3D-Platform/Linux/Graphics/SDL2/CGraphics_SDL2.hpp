@@ -26,7 +26,6 @@ namespace s3d
 		~CGraphics_SDL2() override{}
 
 		void init() override{
-			assert(SDL_Init(SDL_INIT_VIDEO) == 0);
 			m_window = static_cast<SDL_Window*>(Siv3DEngine::Get<ISiv3DWindow>()->getHandle());
 			CRenderer2D_SDL2 * renderer2D = dynamic_cast<CRenderer2D_SDL2*>(Siv3DEngine::Get<ISiv3DRenderer2D>());
 			renderer2D->init();
@@ -89,11 +88,11 @@ namespace s3d
 		}
 
 		const Size& getBackBufferSize() const override{
-			assert(false);
+			return Siv3DEngine::Get<ISiv3DWindow>()->getClientSize(); // 概念が怪しい
 		}
 
 		const Size& getSceneSize() const override{
-			assert(false);
+			return Siv3DEngine::Get<ISiv3DWindow>()->getClientSize(); // 概念が怪しい
 		}
 
 		void setSceneSize(const Size& sceneSize) override{

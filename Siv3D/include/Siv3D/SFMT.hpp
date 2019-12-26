@@ -16,6 +16,7 @@
 # include "Fwd.hpp"
 # include "Number.hpp"
 # include <ThirdParty/SFMT/SFMT.hpp>
+#include<Siv3D/SSE2.hpp>
 
 namespace s3d
 {

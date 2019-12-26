@@ -13,6 +13,7 @@
 # include <Window/IWindow.hpp>
 # include <Siv3D/EngineLog.hpp>
 # include "CMouse.hpp"
+#include<SDL2/SDL_mouse.h>
 
 namespace s3d
 {
@@ -30,13 +31,13 @@ namespace s3d
 	{
 		LOG_TRACE(U"CMouse::init()");
 
-		m_glfwWindow = static_cast<GLFWwindow*>(Siv3DEngine::Get<ISiv3DWindow>()->getHandle());
+		//m_glfwWindow = static_cast<GLFWwindow*>(Siv3DEngine::Get<ISiv3DWindow>()->getHandle());
 		
 		m_buttonsInternal.fill(MouseButtonState::Released);
 		
-		::glfwSetScrollCallback(m_glfwWindow, OnScroll);
+		//::glfwSetScrollCallback(m_glfwWindow, OnScroll);
 		
-		::glfwSetMouseButtonCallback(m_glfwWindow, OnMouseButtonUpdated);
+		//::glfwSetMouseButtonCallback(m_glfwWindow, OnMouseButtonUpdated);
 
 		LOG_INFO(U"ℹ️ CMouse initialized");
 	}
@@ -129,15 +130,5 @@ namespace s3d
 				state = MouseButtonState::Pressed;
 			}
 		}
-	}
-	
-	void CMouse::OnScroll(GLFWwindow*, const double h, const double v)
-	{
-		Siv3DEngine::Get<ISiv3DMouse>()->onScroll(h, -v);
-	}
-	
-	void CMouse::OnMouseButtonUpdated(GLFWwindow*, const int button, const int action, int)
-	{
-		Siv3DEngine::Get<ISiv3DMouse>()->onMouseButtonUpdated(button, (action == GLFW_PRESS));
 	}
 }

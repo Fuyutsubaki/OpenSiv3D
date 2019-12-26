@@ -623,7 +623,7 @@ namespace s3d
 
 		const double w = this->width();
 		const double h = this->height();
-		double ws = width / w;	// ‰½% scaling‚·‚é‚©
+		double ws = width / w;	// ï¿½ï¿½% scalingï¿½ï¿½ï¿½é‚©
 		double hs = height / h;
 
 		double targetWidth, targetHeight;

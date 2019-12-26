@@ -22,14 +22,14 @@ namespace s3d
 	{
 		switch (m_device)
 		{
-		case InputDevice::Keyboard:
-			return Siv3DEngine::Get<ISiv3DKeyboard>()->down(m_code);
+		//case InputDevice::Keyboard:
+		//	return Siv3DEngine::Get<ISiv3DKeyboard>()->down(m_code);
 		case InputDevice::Mouse:
 			return Siv3DEngine::Get<ISiv3DMouse>()->down(m_code);
-		case InputDevice::Gamepad:
-			return Siv3DEngine::Get<ISiv3DGamepad>()->down(m_userIndex, m_code);
-		case InputDevice::XInput:
-			return Siv3DEngine::Get<ISiv3DXInput>()->down(m_userIndex, m_code);
+		//case InputDevice::Gamepad:
+		//	return Siv3DEngine::Get<ISiv3DGamepad>()->down(m_userIndex, m_code);
+		//case InputDevice::XInput:
+		//	return Siv3DEngine::Get<ISiv3DXInput>()->down(m_userIndex, m_code);
 		default:
 			return false;
 		}
@@ -39,14 +39,14 @@ namespace s3d
 	{
 		switch (m_device)
 		{
-		case InputDevice::Keyboard:
-			return Siv3DEngine::Get<ISiv3DKeyboard>()->pressed(m_code);
+		//case InputDevice::Keyboard:
+		//	return Siv3DEngine::Get<ISiv3DKeyboard>()->pressed(m_code);
 		case InputDevice::Mouse:
 			return Siv3DEngine::Get<ISiv3DMouse>()->pressed(m_code);
-		case InputDevice::Gamepad:
-			return Siv3DEngine::Get<ISiv3DGamepad>()->pressed(m_userIndex, m_code);
-		case InputDevice::XInput:
-			return Siv3DEngine::Get<ISiv3DXInput>()->pressed(m_userIndex, m_code);
+		//case InputDevice::Gamepad:
+		//	return Siv3DEngine::Get<ISiv3DGamepad>()->pressed(m_userIndex, m_code);
+		//case InputDevice::XInput:
+		//	return Siv3DEngine::Get<ISiv3DXInput>()->pressed(m_userIndex, m_code);
 		default:
 			return false;
 		}
@@ -56,14 +56,14 @@ namespace s3d
 	{
 		switch (m_device)
 		{
-		case InputDevice::Keyboard:
-			return Siv3DEngine::Get<ISiv3DKeyboard>()->up(m_code);
+		//case InputDevice::Keyboard:
+		//	return Siv3DEngine::Get<ISiv3DKeyboard>()->up(m_code);
 		case InputDevice::Mouse:
 			return Siv3DEngine::Get<ISiv3DMouse>()->up(m_code);
-		case InputDevice::Gamepad:
-			return Siv3DEngine::Get<ISiv3DGamepad>()->up(m_userIndex, m_code);
-		case InputDevice::XInput:
-			return Siv3DEngine::Get<ISiv3DXInput>()->up(m_userIndex, m_code);
+		//case InputDevice::Gamepad:
+			//return Siv3DEngine::Get<ISiv3DGamepad>()->up(m_userIndex, m_code);
+		//case InputDevice::XInput:
+			//return Siv3DEngine::Get<ISiv3DXInput>()->up(m_userIndex, m_code);
 		default:
 			return false;
 		}
@@ -73,14 +73,14 @@ namespace s3d
 	{
 		switch (m_device)
 		{
-		case InputDevice::Keyboard:
-			return Siv3DEngine::Get<ISiv3DKeyboard>()->pressedDuration(m_code);
+		//case InputDevice::Keyboard:
+		//	return Siv3DEngine::Get<ISiv3DKeyboard>()->pressedDuration(m_code);
 		case InputDevice::Mouse:
 			return Siv3DEngine::Get<ISiv3DMouse>()->pressedDuration(m_code);
-		case InputDevice::Gamepad:
-			return Siv3DEngine::Get<ISiv3DGamepad>()->pressedDuration(m_userIndex, m_code);
-		case InputDevice::XInput:
-			return Siv3DEngine::Get<ISiv3DXInput>()->pressedDuration(m_userIndex, m_code);
+		//case InputDevice::Gamepad:
+			//return Siv3DEngine::Get<ISiv3DGamepad>()->pressedDuration(m_userIndex, m_code);
+		//case InputDevice::XInput:
+			//return Siv3DEngine::Get<ISiv3DXInput>()->pressedDuration(m_userIndex, m_code);
 		default:
 			return Duration(0);
 		}
